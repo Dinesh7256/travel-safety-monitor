@@ -2,16 +2,21 @@ import AlertService from '../service/alert-service.js';
 
 const alertService = new AlertService();
 
-export const create = async (req, res) => {
+export const create = async (req, res, io) => {
     try {
-        const response = await alertService.createAlert({
+        const newAlert = await alertService.createAlert({
             touristId: req.body.touristId,
             location: req.body.location
         });
+        // Emit the new alert to all connected clients
+        if (io) {
+            io.emit('new-alert', newAlert);
+            console.log('Emitting new-alert event with data:', newAlert);
+        }
         return res.status(201).json({
             success: true,
             message: 'Successfully created a new alert',
-            data: { alertId: response._id },
+            data: { alertId: newAlert._id },
             err: {}
         });
     } catch (err) {

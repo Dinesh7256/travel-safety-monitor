@@ -16,7 +16,7 @@ class CrudRepository {
 
     async destroy(id) {
         try {
-            const result = await this.model.findByIdAndDelete(id);
+            const result = await this.model.destroy({ where: { id } });
             return result;
         } catch (error) {
             console.log("Something went wrong in crud repo");
@@ -26,14 +26,7 @@ class CrudRepository {
 
     async get(id) {
         try {
-            // Use findByPk for Sequelize models, findById for Mongoose models
-            if (typeof this.model.findByPk === 'function') {
-                return await this.model.findByPk(id);
-            } else if (typeof this.model.findById === 'function') {
-                return await this.model.findById(id);
-            } else {
-                throw new Error('Model does not support findByPk or findById');
-            }
+            return await this.model.findByPk(id);
         } catch (error) {
             console.log("Something went wrong in crud repo");
             throw error;
@@ -42,7 +35,7 @@ class CrudRepository {
 
     async getAll() {
         try {
-            const result = await this.model.find({});
+            const result = await this.model.findAll();
             return result;
         } catch (error) {
             console.log("Something went wrong in crud repo");
@@ -52,8 +45,9 @@ class CrudRepository {
 
     async update(id, data) {
         try {
-            const result = await this.model.findByIdAndUpdate(id, data, {new: true});
-            return result;
+            await this.model.update(data, { where: { id } });
+            const updated = await this.model.findByPk(id);
+            return updated;
         } catch(error) {
             console.log("Something went wrong in crud repo");
             throw error;

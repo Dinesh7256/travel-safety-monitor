@@ -1,0 +1,127 @@
+/* File: src/Dashboard.css */
+
+/* Define our theme colors as CSS variables for easy reuse */
+:root {
+  --primary-blue: #000080;
+  --primary-orange: #FF8C00;
+  --text-light: #E5E7EB; /* light gray */
+  --text-dark: #9CA3AF; /* darker gray */
+}
+
+.dashboard {
+  background-color: var(--primary-blue);
+  min-height: 100vh;
+  color: white;
+}
+
+.header {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-orange);
+}
+
+.header p {
+  color: var(--text-light);
+}
+
+.mainContent {
+  display: flex;
+  padding: 2rem 1.5rem;
+  gap: 2rem; /* space between sidebar and map */
+}
+
+.alertsSidebar {
+  width: 33.33%;
+}
+
+.alertsSidebar h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-orange);
+  padding-bottom: 0.5rem;
+}
+
+.alertCard {
+  background-color: rgba(0, 20, 100, 0.5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.alertCard:hover {
+   background-color: rgba(0, 20, 100, 0.75);
+}
+
+.alertCard .title {
+  font-weight: bold;
+  color: var(--primary-orange);
+}
+
+.alertCard .detail {
+   font-size: 0.875rem;
+   color: var(--text-light);
+}
+
+.mapArea {
+  width: 66.67%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+  color: #4A5568; /* dark gray */
+}
+
+
+/* --- Styles for Map Marker --- */
+.marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 50% 50% 50% 0;
+  background: #FF8C00; /* Use our theme orange */
+  position: absolute;
+  transform: rotate(-45deg);
+  border: 2px solid white;
+}
+.marker span {
+  display: block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  margin: 11px;
+  box-shadow: 0px 0px 5px #000;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 140, 0, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 140, 0, 0);
+  }
+}
+.mapPlaceholder p {
+  color: #718096; /* medium gray */
+}

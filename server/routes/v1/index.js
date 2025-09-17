@@ -1,11 +1,13 @@
 import express from 'express';
-import touristRouter from './tourist-routes.js';
-import alertRouter from './alert-routes.js';
+import { create as createAlert } from '../../controller/alert-controller.js';
+import { register } from '../../controller/tourist-controller.js';
 
-const router = express.Router();
+// Export a function that takes io and returns the router
+export default (io) => {
+    const router = express.Router();
 
-// router.use('/auth', authRouter); // Your existing auth routes (commented out, file missing)
-router.use('/', touristRouter); // Routes like /register
-router.use('/', alertRouter);   // Routes like /alert
+    router.post('/register', register);
+    router.post('/alert', (req, res) => createAlert(req, res, io));
 
-export default router;
+    return router;
+}

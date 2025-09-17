@@ -1,9 +1,6 @@
-
-
 import dotenv from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-// Removed passport and JWT middleware imports
 import apiroutes from './routes/index.js';
 import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
@@ -39,7 +36,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api', apiroutes);
+app.use('/api', apiroutes(io));
 
 import Tourist from './models/tourist.js';
 
